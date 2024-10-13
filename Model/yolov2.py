@@ -62,16 +62,16 @@ X_train, X_test, Y_train, Y_test = train_test_split(images_x, labels_y_encoded, 
 input_layer = Input(shape = (224, 224, 1))
     
 #Convolution Layers
-x = layers.Conv2D(32, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.001))(input_layer)
+x = layers.Conv2D(32, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(input_layer)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
-x = layers.Conv2D(64, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.001))(x)
+x = layers.Conv2D(64, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(x)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
-x = layers.Conv2D(128, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.001))(x)
+x = layers.Conv2D(128, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(x)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
-x = layers.Conv2D(256, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.001))(x)
+x = layers.Conv2D(256, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(x)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
 x = layers.Flatten()(x)
@@ -83,7 +83,7 @@ output = Dense(2, activation = "softmax")(x)
 
 #Compile YOLO Model
 yolo_model = Model(inputs = input_layer, outputs = output)
-yolo_model.compile(optimizer = "adam", loss = "categorical_crossentropy", metrics = ['accuracy'])
+yolo_model.compile(optimizer = Adam(learning_rate = 0.0001), loss = "categorical_crossentropy", metrics = ['accuracy'])
 #yolo_model.summary()
 
 #Configure Checkpoint Model
