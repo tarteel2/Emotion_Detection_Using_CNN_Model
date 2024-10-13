@@ -55,12 +55,6 @@ labels_y = np.array(labels)
 #Encoding labels
 labels_y_encoded = tf.keras.utils.to_categorical(labels_y, num_classes = 2)
 
-#Normalise Images
-images_x = images_x.astype('float32') / 255.0
-
-#Reshape Images
-images_x = images_x.reshape(-1, 224, 224, 1)
-
 #Split into 75 train and 25 test
 X_train, X_test, Y_train, Y_test = train_test_split(images_x, labels_y_encoded, test_size = 0.25, random_state = 10)
 
@@ -89,7 +83,7 @@ output = Dense(2, activation = "softmax")(x)
 
 #Compile YOLO Model
 yolo_model = Model(inputs = input_layer, outputs = output)
-yolo_model.compile(optimizer = Adam(learning_rate = 0.0001), loss = "categorical_crossentropy", metrics = ['accuracy'])
+yolo_model.compile(optimizer = "adam", loss = "categorical_crossentropy", metrics = ['accuracy'])
 #yolo_model.summary()
 
 #Configure Checkpoint Model
