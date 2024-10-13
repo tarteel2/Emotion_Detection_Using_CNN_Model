@@ -68,21 +68,21 @@ X_train, X_test, Y_train, Y_test = train_test_split(images_x, labels_y_encoded, 
 input_layer = Input(shape = (224, 224, 1))
     
 #Convolution Layers
-x = layers.Conv2D(32, (3, 3), padding = 'same', activation = "relu")(input_layer)
+x = layers.Conv2D(32, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(input_layer)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
-x = layers.Conv2D(64, (3, 3), padding = 'same', activation = "relu")(x)
+x = layers.Conv2D(64, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(x)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
-x = layers.Conv2D(128, (3, 3), padding = 'same', activation = "relu")(x)
+x = layers.Conv2D(128, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(x)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
-x = layers.Conv2D(256, (3, 3), padding = 'same', activation = "relu")(x)
+x = layers.Conv2D(256, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(x)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
 x = layers.Flatten()(x)
 x = layers.Dense(512, activation = "relu")(x)
-x = layers.Dropout(0.5)(x)
+x = layers.Dropout(0.6)(x)
 
 #Detection Layer
 output = Dense(2, activation = "softmax")(x)
@@ -97,7 +97,7 @@ fle_s = 'Model/Output/Emotion_Model.keras'
 checkpointer = ModelCheckpoint(fle_s, monitor = 'loss', verbose = 1, save_best_only = True, save_weights_only = False, mode = 'auto', save_freq = 'epoch')
 callback_list = [checkpointer]
 
-save = yolo_model.fit(X_train, Y_train, batch_size = 32, validation_data = (X_test, Y_test), epochs = 100, callbacks = [callback_list])
+save = yolo_model.fit(X_train, Y_train, batch_size = 64, validation_data = (X_test, Y_test), epochs = 100, callbacks = [callback_list])
 
 #Checking train and test loss and accuracy values from above neural network
 train_loss = save.history['loss']
