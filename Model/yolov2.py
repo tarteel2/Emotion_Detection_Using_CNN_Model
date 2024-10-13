@@ -76,7 +76,7 @@ x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
 x = layers.Flatten()(x)
 x = layers.Dense(512, activation = "relu")(x)
-x = layers.Dropout(0.6)(x)
+x = layers.Dropout(0.5)(x)
 
 #Detection Layer
 output = Dense(2, activation = "softmax")(x)
