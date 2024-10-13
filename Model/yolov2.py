@@ -55,12 +55,6 @@ labels_y = np.array(labels)
 #Encoding labels
 labels_y_encoded = tf.keras.utils.to_categorical(labels_y, num_classes = 2)
 
-#Normalise Images
-images_x = images_x.astype('float32') / 255.0
-
-#Reshape Images
-images_x = images_x.reshape(-1, 224, 224, 1)
-
 #Split into 75 train and 25 test
 X_train, X_test, Y_train, Y_test = train_test_split(images_x, labels_y_encoded, test_size = 0.25, random_state = 10)
 
@@ -97,7 +91,7 @@ fle_s = 'Model/Output/Emotion_Model.keras'
 checkpointer = ModelCheckpoint(fle_s, monitor = 'loss', verbose = 1, save_best_only = True, save_weights_only = False, mode = 'auto', save_freq = 'epoch')
 callback_list = [checkpointer]
 
-save = yolo_model.fit(X_train, Y_train, batch_size = 64, validation_data = (X_test, Y_test), epochs = 100, callbacks = [callback_list])
+save = yolo_model.fit(X_train, Y_train, batch_size = 32, validation_data = (X_test, Y_test), epochs = 100, callbacks = [callback_list])
 
 #Checking train and test loss and accuracy values from above neural network
 train_loss = save.history['loss']
