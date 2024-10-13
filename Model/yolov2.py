@@ -55,6 +55,12 @@ labels_y = np.array(labels)
 #Encoding labels
 labels_y_encoded = tf.keras.utils.to_categorical(labels_y, num_classes = 2)
 
+#Normalise Images
+images_x = images_x.astype('float32') / 255.0
+
+#Reshape Images
+images_x = images_x.reshape(-1, 224, 224, 1)
+
 #Split into 75 train and 25 test
 X_train, X_test, Y_train, Y_test = train_test_split(images_x, labels_y_encoded, test_size = 0.25, random_state = 10)
 
@@ -62,16 +68,16 @@ X_train, X_test, Y_train, Y_test = train_test_split(images_x, labels_y_encoded, 
 input_layer = Input(shape = (224, 224, 1))
     
 #Convolution Layers
-x = layers.Conv2D(32, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(input_layer)
+x = layers.Conv2D(32, (3, 3), padding = 'same', activation = "relu")(input_layer)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
-x = layers.Conv2D(64, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(x)
+x = layers.Conv2D(64, (3, 3), padding = 'same', activation = "relu")(x)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
-x = layers.Conv2D(128, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(x)
+x = layers.Conv2D(128, (3, 3), padding = 'same', activation = "relu")(x)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
-x = layers.Conv2D(256, (3, 3), padding = 'same', activation = "relu", kernel_regularizer = l2(0.0001))(x)
+x = layers.Conv2D(256, (3, 3), padding = 'same', activation = "relu")(x)
 x = layers.MaxPooling2D(pool_size = (2, 2))(x)
 
 x = layers.Flatten()(x)
