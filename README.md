@@ -1,2 +1,2 @@
 # Emotion-Detection-Using-YOLO-Model
-This Project Implements A Simple YOLO Model Architecture Using Convolution Layers To Train And Predict Happy And Sad Face Emotions On Black And White Images Using Python Version 3.12.5 in Visual Studio Code.
+This Project Presents A Custom YOLO Model Architecture Designed To Detect And Classify Facial Emotions—Happy And Sad—Using Black-And-White Images. Built With Python 3.12.5 In Visual Studio Code, The Model Leverages Convolutional Layers For Efficient Training And Accurate Predictions. Dive Into This Repository To Explore How Cutting-Edge Deep Learning Techniques Can Be Applied To Emotion Detection!
