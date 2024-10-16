@@ -18,18 +18,18 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from sklearn.metrics import roc_curve,auc, confusion_matrix, ConfusionMatrixDisplay
 from keras.layers import Conv2D,MaxPool2D,Dense,Dropout,BatchNormalization,Flatten,Input,Add,Reshape
 
-#Define dataset path
+#Define Dataset Path
 dataset_folder = 'New_Data/'
 sub_folders = os.listdir(dataset_folder)
 
-#Declare folder names as labels and images within
+#Declare Folder Names as Labels and Images Within
 i = 0
 last = []
 images = []
 labels = []
 tmp = sub_folders
 
-#Read sub_folders in main dataset folder one at a time
+#Read Sub Folders in Main Dataset Folder one at a time
 for sub_folder in sub_folders:
   sub_folder_idx = tmp.index(sub_folder)
   label = sub_folder_idx
@@ -37,7 +37,7 @@ for sub_folder in sub_folders:
   path = dataset_folder+'/'+sub_folder
   sub_folder_images = os.listdir(path)
   
-  #Read images in sub folder, one by one
+  #Read Images in Sub Folders, one by one
   for image in sub_folder_images:
     image_path = path+'/'+image
     #print(image_path+"\t"+str(label))
@@ -48,14 +48,14 @@ for sub_folder in sub_folders:
     i+=1
   last.append(i)
   
-#Define x and y
+#Define X and Y
 images_x = np.array(images)
 labels_y = np.array(labels)
 
-#Encoding labels
+#Encoding Labels
 labels_y_encoded = tf.keras.utils.to_categorical(labels_y, num_classes = 2)
 
-#Split into 75 train and 25 test
+#Split Into 75 Train and 25 Test
 X_train, X_test, Y_train, Y_test = train_test_split(images_x, labels_y_encoded, test_size = 0.25, random_state = 10)
 
 #YOLO Model Architecture
@@ -93,13 +93,13 @@ yolo_model.compile(optimizer = Adam(learning_rate = 0.0001), loss = "categorical
 
 #save = yolo_model.fit(X_train, Y_train, batch_size = 32, validation_data = (X_test, Y_test), epochs = 100, callbacks = [callback_list])
 
-# #Checking train and test loss and accuracy values from above neural network
+# #Checking Train and Test Loss and Accuracy Values from Above Model
 # train_loss = save.history['loss']
 # test_loss = save.history['val_loss']
 # train_accuracy = save.history['accuracy']
 # test_accuracy = save.history['val_accuracy']
 
-# #Plotting line chart to visualize loss and accuracy values by epochs
+# #Plotting Line Chart to Visualize Loss and Accuracy Values by Epochs
 # fig, ax = plt.subplots(ncols = 2, figsize = (15, 7))
 # ax = ax.ravel()
 # ax[0].plot(train_loss, label = 'Train Loss', color = 'royalblue', marker = 'o', markersize = 5)
@@ -118,7 +118,7 @@ yolo_model.compile(optimizer = Adam(learning_rate = 0.0001), loss = "categorical
 # fig.suptitle(x = 0.5, y = 0.92, t = "Lineplots Showing Loss and Accuracy of Yolo Model by Epochs", fontsize = 16)
 # plt.show()
 
-#Plotting confusion matix and roc curve of model
+#Plotting Confusion Matix and ROC Curve of Model
 dir = "Model/Output/Emotion_Model.keras"
 model = load_model(dir)
 best_model = model
