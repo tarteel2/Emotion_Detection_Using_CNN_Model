@@ -18,7 +18,7 @@ draw_me = mp.solutions.drawing_utils
 mesh_face_me = mp.solutions.face_mesh
 draw_styles_me = mp.solutions.drawing_styles
 
-spec_draw = draw_me.DrawingSpec(thickness=1, circle_radius=1)
+spec_draw = draw_me.DrawingSpec(thickness = 1, circle_radius = 1)
 
 with mesh_face_me.FaceMesh(
     static_image_mode = True,
