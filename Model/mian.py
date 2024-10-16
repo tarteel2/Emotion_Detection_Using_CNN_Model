@@ -29,7 +29,7 @@ images = []
 labels = []
 tmp = sub_folders
 
-#Read and set index 0:Happy and 1:Sad folders in dataset folder
+#Read sub_folders in main dataset folder one at a time
 for sub_folder in sub_folders:
   sub_folder_idx = tmp.index(sub_folder)
   label = sub_folder_idx
