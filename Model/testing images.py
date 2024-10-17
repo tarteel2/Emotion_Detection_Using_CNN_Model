@@ -27,7 +27,7 @@ with mesh_face_me.FaceMesh(
     min_detection_confidence = 0.5) as mesh_face:
 
     #Read Downloaded Test Image In OpenCV
-    test_img = cv2.imread('Model/Photos/9sad.png')
+    test_img = cv2.imread('Model/Photos/3happy.png')
     
     #Convert Image To Gray Scale OpenCV
     gray_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2GRAY)
